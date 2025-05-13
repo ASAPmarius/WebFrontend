@@ -3,6 +3,6 @@ FROM denoland/deno:2.2.9
 WORKDIR /app
 COPY . .
 RUN deno cache server.ts
-RUN deno compile --allow-net --allow-read=./frontend --output app server.ts 8080
 
-ENTRYPOINT ["/app/app"]
+# Clean JSON array format with environment permissions
+CMD ["deno", "run", "--allow-net", "--allow-read=./frontend", "--allow-env", "server.ts"]

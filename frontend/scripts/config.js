@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-unused-vars
 // Frontend configuration module
 const config = (function() {
   // Detect if we're in production based on the URL
@@ -19,16 +20,14 @@ const config = (function() {
   // Build the complete URLs
   const frontendUrl = `${protocol}://${domain}${frontendPort ? ':' + frontendPort : ''}`;
   
-  // In production, the backend might be at the same domain but different path,
-  // or it could be a completely different domain based on your deployment
+  // Allow overriding the backend URL via a global variable that can be set by the server
+  // This lets Dokku environment vars get passed to the frontend
   const backendUrl = isProduction 
-    ? (globalThis.BACKEND_URL || `https://caracaca-backend-app-50a2aebeae3d.herokuapp.com/`)
+    ? (globalThis.BACKEND_URL || `https://caracaca-backend.your-dokku-domain.com`)
     : `http://localhost:3000`;
   
-  // WebSocket URL
-  const websocketUrl = isProduction 
-    ? `${wsProtocol}://${domain}${backendPort ? ':' + backendPort : ''}`
-    : `ws://localhost:3000`;
+  // WebSocket URL is derived from the backend URL
+  const websocketUrl = backendUrl.replace(/^http/, 'ws').replace(/^https/, 'wss');
   
   console.log('Frontend Config:', {
     environment: isProduction ? 'production' : 'development',
