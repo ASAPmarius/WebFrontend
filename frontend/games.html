@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game Lobby</title>
+    <!-- Authentication check script -->
+    <script src="scripts/auth-check.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/games.css">
+    <script src="scripts/config.js"></script>
+    <script src="scripts/games.js"></script>
+</head>
+<body>
+    <button id="profileBtn" class="profile-btn">My Profile</button>
+    <button id="logoutBtn" class="logout-btn" onclick="logout()">Logout</button>
+    
+    <div class="lobby-container">
+        <div class="lobby-header">
+            <h1 class="lobby-title">Card Game Lobby</h1>
+            <button id="createGameBtn" class="create-game-btn">Create New Game</button>
+        </div>
+
+        <div id="userStatus" class="user-status">
+            Checking your status...
+        </div>
+
+        <div id="gamesLoading" class="loading">Loading available games...</div>
+        <div id="gamesList" class="games-list" style="display: none;"></div>
+        <div id="noGames" class="no-games" style="display: none;">
+            <p>No active games available. Create a new game to start playing!</p>
+        </div>
+
+        <button id="returnBtn" class="return-btn">Return to Current Game</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1125 @@
+/* CSS Variables for consistent spacing and sizing */
+:root {
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+}
+
+/* Base font size - responsive approach */
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 48rem) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 112.5rem) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* ====================== BASE LAYOUT & COMMON STYLES ====================== */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  height: 100vh;
+  margin: 0;
+  background-color: #d3d3d3;
+  overflow: hidden;
+}
+
+button {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+  text-align: center;
+  color: #4CAF50;
+  text-shadow: 0 0 0.3125rem rgba(255, 255, 255, 0.8);
+}
+
+/* ====================== PLAYER PROFILES ====================== */
+.profile-container {
+  position: absolute;
+  top: var(--spacing-lg);
+  left: var(--spacing-lg);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.profile-container h2 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: 1.2em;
+  color: #4CAF50;
+}
+
+.profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-box:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.profile-box.current-user {
+  border: 2px solid #4CAF50;
+}
+
+.profile-box.disconnected {
+  border: 1px dashed #ccc;
+}
+
+.profile-picture {
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  margin-top: 0.3125rem;
+  font-size: var(--font-size-xs);
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ====================== CHAT CONTAINER & MESSAGES ====================== */
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 25rem;
+  width: min(25rem, 80vw); /* More responsive approach */
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  border-left: 1px solid rgba(204, 204, 204, 0.3);
+  box-shadow: -0.3125rem 0 0.9375rem rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  pointer-events: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.container.chat-hidden {
+  transform: translateX(100%);
+}
+
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  background-color: transparent !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  pointer-events: auto !important;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto !important;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  height: 80vh;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 1080 !important;
+}
+
+.message-box {
+  display: flex;
+  align-items: center;
+  max-width: 70%;
+  padding: var(--spacing-sm);
+  margin: 0.3125rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius-md);
+  background-color: #f1f1f1 !important;
+  overflow-wrap: break-word;
+  pointer-events: auto !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.my-message {
+  align-self: flex-end;
+  background-color: #d1f8d1 !important;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.other-message {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+}
+
+.user-picture {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin-right: var(--spacing-sm);
+}
+
+.my-message .user-picture {
+  margin-left: var(--spacing-sm);
+  margin-right: 0;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-bottom: 0.1875rem;
+}
+
+.message-text {
+  overflow-wrap: break-word;
+}
+
+/* ====================== CHAT INPUT AREA ====================== */
+.input-area {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  padding: var(--spacing-sm);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 1090 !important;
+  position: relative;
+  pointer-events: auto !important;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: var(--spacing-sm);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+}
+
+#messageInput {
+  position: relative;
+  z-index: 1100 !important;
+  background-color: white !important;
+  cursor: text !important;
+  opacity: 1 !important;
+  border: 2px solid #4CAF50;
+  padding: 0.5rem 0.625rem;
+  pointer-events: auto !important;
+}
+
+#messageInput:focus {
+  outline: 2px solid #45a049;
+  box-shadow: 0 0 0.3125rem rgba(76, 175, 80, 0.5);
+}
+
+.input-area button {
+  position: relative;
+  z-index: 1100 !important;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer !important;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-weight: bold;
+  pointer-events: auto !important;
+}
+
+/* ====================== CHAT TOGGLE BUTTON ====================== */
+.chat-toggle {
+  position: fixed;
+  top: 50%;
+  right: 25rem;
+  transform: translateY(-50%);
+  width: 1.875rem;
+  height: 3.75rem;
+  background-color: #4CAF50;
+  border-radius: 0.5rem 0 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: -0.125rem 0 0.5rem rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease;
+}
+
+.chat-toggle.chat-hidden {
+  right: 0;
+}
+
+.chat-toggle::before {
+  content: "◀";
+  color: white;
+  font-size: 1.25rem;
+}
+
+.chat-toggle.chat-hidden::before {
+  content: "▶";
+}
+
+/* ====================== CARDS & HAND ====================== */
+.card-stack {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 28.125rem);
+  transform: translateY(-50%);
+  width: 18.75rem;
+  height: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.5s;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.pile-count {
+  position: absolute !important;
+  top: -0.625rem !important;
+  right: -0.625rem !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  background-color: #ff5722 !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 50% !important;
+  z-index: 9999 !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5) !important;
+  pointer-events: none !important;
+}
+
+.pile-count.double-digit {
+  font-size: 0.875rem !important;
+}
+
+.hand-container {
+  position: absolute;
+  bottom: 0.625rem;
+  left: 50%;
+  width: 85vw;
+  max-width: 75rem;
+  transform: translateX(-50%);
+  height: 7.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  z-index: 10;
+}
+
+.hand-card {
+  width: 5rem;
+  height: 7.5rem;
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  transform-origin: bottom center;
+}
+
+.hand-card .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.hand-card:hover {
+  transform: translateY(-3.75rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+/* ====================== POKER TABLE ====================== */
+.poker-table-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(90vw - 12.5rem);
+  height: 75vh;
+  max-width: 75rem;
+  max-height: 43.75rem;
+  border-radius: 45% / 30%;
+  background-color: #2a7d2e;
+  box-shadow: 0 0 0 1.25rem #763c28;
+  z-index: 5;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.table-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8.75rem;
+  height: 8.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+}
+
+.draw-pile {
+  position: relative;
+  width: 7.5rem;
+  height: 11.25rem;
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: visible !important;
+  transition: transform 0.2s ease;
+}
+
+.draw-pile:hover {
+  transform: scale(1.05);
+}
+
+.player-seat {
+  position: absolute;
+  width: 11.25rem;
+  padding: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0.75rem;
+  border: 3px solid #333;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  transition: transform 0.2s ease;
+  transform-origin: center bottom;
+}
+
+.player-seat.current-player {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.player-info {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.player-avatar {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #666;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+}
+
+.player-details {
+  margin-left: 0.75rem;
+  flex-grow: 1;
+}
+
+.player-name {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 6.25rem;
+}
+
+.player-cards {
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+.card-mini {
+  display: inline-block;
+  width: 1.875rem;
+  height: 2.625rem;
+  background-color: white;
+  border-radius: var(--border-radius-sm);
+  margin-right: -0.9375rem;
+  border: 1px solid #ccc;
+  box-shadow: 0.0625rem 0.0625rem 0.1875rem rgba(0, 0, 0, 0.3);
+}
+
+.cards-count {
+  margin-left: 1.25rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #ffcc00;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Position seats around but outside the elliptical table */
+.player-seat:nth-child(1) {
+  top: -6.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.player-seat:nth-child(2) {
+  top: 20%;
+  right: -7.5rem;
+}
+
+.player-seat:nth-child(3) {
+  bottom: 20%;
+  right: -7.5rem;
+}
+
+.player-seat:nth-child(4) {
+  bottom: -6.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.player-seat:nth-child(5) {
+  bottom: 20%;
+  left: -7.5rem;
+}
+
+.player-seat:nth-child(6) {
+  top: 20%;
+  left: -7.5rem;
+}
+
+/* ====================== RESPONSIVE STYLES ====================== */
+@media (max-width: 75rem) {
+  .poker-table-container {
+    width: 85vw;
+    height: 65vh;
+  }
+  
+  .player-seat {
+    width: 9.375rem;
+    padding: 0.5rem;
+  }
+  
+  .player-avatar {
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+  
+  /* Adjust player positions for smaller screens */
+  .player-seat:nth-child(1) { top: -5rem; }
+  .player-seat:nth-child(2) { right: -6.25rem; }
+  .player-seat:nth-child(3) { right: -6.25rem; }
+  .player-seat:nth-child(4) { bottom: -5rem; }
+  .player-seat:nth-child(5) { left: -6.25rem; }
+  .player-seat:nth-child(6) { left: -6.25rem; }
+  
+  .container {
+    width: 21.875rem;
+  }
+  
+  .chat-toggle {
+    right: 21.875rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .container {
+    width: min(18.75rem, 90vw);
+  }
+  
+  .chat-toggle {
+    right: min(18.75rem, 90vw);
+  }
+  
+  .poker-table-container {
+    width: 90vw;
+    height: 60vh;
+  }
+  
+  .player-seat {
+    width: 7.5rem;
+  }
+  
+  .hand-card {
+    width: 4rem;
+    height: 6rem;
+  }
+  
+  .hand-card:hover {
+    transform: translateY(-2rem);
+  }
+}
+
+/* ====================== GAME PHASE STYLING ====================== */
+body.phase-waiting .poker-table-container {
+  background-color: #3a5a3c;
+  box-shadow: 0 0 0 1.25rem #5a3c38;
+}
+
+body.phase-setup .poker-table-container {
+  background-color: #2f4f4f;
+  box-shadow: 0 0 0 1.25rem #614a31;
+}
+
+body.phase-playing .poker-table-container {
+  background-color: #2a7d2e; /* Default green */
+  box-shadow: 0 0 0 1.25rem #763c28;
+}
+
+body.phase-finished .poker-table-container {
+  background-color: #4a4a4a;
+  box-shadow: 0 0 0 1.25rem #3c3c3c;
+  opacity: 0.9;
+}
+
+/* Hide round indicator in waiting phase, show in playing phase */
+body:not(.phase-playing) .round-indicator {
+  display: none;
+}
+
+body.phase-playing .round-indicator {
+  display: block;
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 0.9375rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  z-index: 100;
+}
+
+/* ====================== TURN-BASED INDICATORS ====================== */
+.player-seat.active-player {
+  border: 3px solid #ffd700; 
+  background-color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 0.9375rem rgba(255, 215, 0, 0.7);
+  transform: scale(1.05);
+  z-index: 25;
+}
+
+.player-seat.active-player .player-avatar {
+  border: 2px solid #ffd700;
+}
+
+.player-seat.active-player .player-name {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* My turn indicator */
+body.my-turn .hand-container {
+  animation: pulse-highlight 2s infinite;
+}
+
+@keyframes pulse-highlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 0.625rem rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+  }
+}
+
+/* ====================== DISCARD PILE ====================== */
+.discard-pile {
+  position: relative;
+  width: 7.5rem;
+  height: 11.25rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible !important;
+  transition: transform 0.2s ease;
+}
+
+.discard-pile:hover {
+  transform: scale(1.05);
+}
+
+/* ====================== CARD ACTIONS ====================== */
+.hand-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default; /* Default to non-interactive */
+}
+
+.hand-card.playable {
+  cursor: pointer;
+}
+
+.hand-card.playable:hover {
+  transform: translateY(-3.75rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+/* Card being removed animation */
+.hand-card.removing {
+  animation: card-remove 0.5s forwards;
+  pointer-events: none;
+}
+
+@keyframes card-remove {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-9.375rem) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* Played card animation */
+.played-card {
+  width: 6.25rem;
+  height: 9.375rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+
+.played-card.played {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 1;
+}
+
+/* ====================== GAME CONTROLS ====================== */
+.game-controls-container {
+  position: fixed;
+  top: var(--spacing-lg);
+  left: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  z-index: 1000;
+}
+
+.game-control-btn {
+  padding: 0.625rem 0.9375rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.game-control-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.game-control-btn.finish-game {
+  background-color: #f44336;
+  color: white;
+  position: fixed;
+  top: calc(var(--spacing-lg) + 100px); 
+  right: var(--spacing-lg);
+  z-index: 90; 
+}
+
+.game-actions {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 90; 
+}
+
+.game-control-btn.finish-game:hover {
+  background-color: #d32f2f;
+}
+
+.game-control-btn.back-to-lobby {
+  background-color: #555;
+}
+
+.game-control-btn.back-to-lobby:hover {
+  background-color: #333;
+}
+
+.back-to-lobby-btn {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  left: var(--spacing-lg);
+  z-index: 100;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 0.625rem 0.9375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+  width: auto;
+  height: auto;
+}
+
+.back-to-lobby-btn:hover {
+  background-color: #45a049;
+}
+
+/* ====================== NOTIFICATION SYSTEM ====================== */
+.game-notification {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  right: 400px; /* Position it closer to the table, mirroring war-result-indicator */
+  left: auto; /* Override the original left positioning */
+  transform: translateY(-50%); /* Center vertically only */
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Keep only the fade transition */
+  pointer-events: none;
+  min-width: 150px; /* Add minimum width similar to war-result-indicator */
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Update the show class to only change opacity without moving */
+.game-notification.show {
+  opacity: 1;
+}
+
+.game-notification.error {
+  background-color: rgba(244, 67, 54, 0.9);
+}
+
+.game-notification.turn {
+  background-color: rgba(255, 193, 7, 0.9);
+  color: #333;
+}
+
+.game-notification.card-played {
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+/* ====================== ROUND INDICATOR ====================== */
+.round-indicator {
+  position: fixed;
+  top: calc(var(--spacing-lg) + 50px); /* Position below the start game button */
+  right: var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 0.9375rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  z-index: 100;
+  transition: right 0.3s ease;
+}
+
+/* ====================== GAME RESULTS OVERLAY ====================== */
+.results-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.results-container {
+  background-color: white;
+  padding: 1.875rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0.3125rem 1.25rem rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 37.5rem;
+  text-align: center;
+}
+
+.results-container h2 {
+  color: #4CAF50;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-xxl);
+}
+
+.results-list {
+  margin: 1.25rem 0;
+}
+
+.player-result {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 0.9375rem;
+  margin: 0.3125rem 0;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.2em;
+}
+
+.player-result.winner {
+  background-color: #d4edda;
+  border: 2px solid #4CAF50;
+  font-weight: bold;
+}
+
+.result-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.play-again-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.play-again-button:hover {
+  background-color: #45a049;
+  transform: translateY(-0.125rem);
+}
+
+.return-button {
+  background-color: #555;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.return-button:hover {
+  background-color: #333;
+  transform: translateY(-0.125rem);
+}
+
+/* Chat notification dot */
+.chat-notification-dot {
+  position: absolute;
+  top: -0.5rem;
+  left: -0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: #ff3b30;
+  border-radius: 50%;
+  display: none; /* Hidden by default */
+  animation: pulse-notification 2s infinite;
+  z-index: 1010;
+  border: 2px solid white; /* Added border to make it stand out better */
+}
+
+@keyframes pulse-notification {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0.375rem rgba(255, 59, 48, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+  }
+}
+
+body.phase-playing .card-stack {
+  display: none !important;
+}
+
+/* Additional selector for extra specificity at small screens */
+@media (max-width: 48rem) {
+  #cardStack,
+  .card-stack,
+  body[class*="war"] .card-stack,
+  body[class*="phase-playing"] .card-stack {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+.player-seat.disconnected {
+  border: 2px dashed #aaa;
+  opacity: 0.8;
+}
+
+.player-seat.disconnected .player-avatar {
+  opacity: 0.5;
+}
+
+.player-seat.disconnected .player-name {
+  color: #aaa;
+}
+
+/* Enhanced styling for disconnected player seats */
+.player-seat.disconnected {
+  border: 2px dashed #aaa;
+  box-shadow: none;
+  opacity: 0.8;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Add a "disconnected" label */
+.player-seat.disconnected::after {
+  content: "Disconnected";
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 0.7rem;
+  color: #ff6b6b;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-style: italic;
+}
+
+/* Fade the avatar */
+.player-seat.disconnected .player-avatar {
+  opacity: 0.5;
+  filter: grayscale(70%);
+  border-color: #aaa;
+}
+
+/* Change text color */
+.player-seat.disconnected .player-name {
+  color: #aaa;
+}
+
+/* Add a crossed line through the player's card count */
+.player-seat.disconnected .player-cards {
+  position: relative;
+  opacity: 0.6;
+}
+
+.player-seat.disconnected .card-mini {
+  border-color: #777;
+  background-color: #555;
+}
+
+/* Style the player info section */
+.player-seat.disconnected .player-info {
+  opacity: 0.8;
+}

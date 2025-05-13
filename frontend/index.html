@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game - War</title>
+    <script src="scripts/config.js"></script>
+    <!-- Authentication check script -->
+    <script src="scripts/auth-check.js"></script>
+    <!-- Single consolidated CSS file -->
+    <link rel="stylesheet" href="styles/main-style.css">
+    <!-- Add War game specific styles -->
+    <link rel="stylesheet" href="styles/war-styles.css">
+    <!-- Load the base card game framework first -->
+    <script src="scripts/card-game.js" defer></script>
+    <!-- Then load the War game implementation -->
+    <script src="scripts/war-game.js" defer></script>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Player Profiles</h2>
+        <div class="profiles" id="profiles">
+            <!-- Player profiles will be populated dynamically -->
+        </div>
+    </div>
+    
+    <!-- Poker table will be inserted here dynamically via JavaScript -->
+    
+    <div class="container">
+        <h1>War Card Game</h1>
+        <div class="chatbox">
+            <div class="messages" id="messages"></div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type your message here..." tabindex="1">
+                <button onclick="sendJson();" type="button">Send</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-toggle" id="chatToggle"></div>
+    
+    <div class="card-stack" id="cardStack">
+        <div class="card" id="card">
+            <!-- Card will be populated dynamically -->
+        </div>
+    </div>
+    
+    <div class="hand-container" id="handContainer">
+        <!-- Player's hand will be populated dynamically -->
+    </div>
+    
+    <!-- Return to Games Lobby button -->
+    <button id="backToLobbyBtn" class="back-to-lobby-btn">Back to Games Lobby</button>
+
+    <div id="gameActions" class="game-actions">
+        <button id="startGameBtn" class="game-control-btn start-game">Start Game</button>
+    </div>
+</body>
+</html>

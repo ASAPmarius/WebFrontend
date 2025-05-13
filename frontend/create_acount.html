@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="styles/style_create_acount.css">
+    <script src="scripts/config.js"></script>
+    <script src="scripts/script_create_acount.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Account</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <span id="error-message" style="color: red; display: none;"></span>
+        <br>
+        <label for="profile_picture">Profile Picture (optional):</label>
+        <div class="profile-upload">
+            <input type="file" id="profile_picture_upload" accept="image/*">
+            <div id="image-preview" style="display: none;">
+                <img id="preview" src="#" alt="Preview" class="profile-picture">
+            </div>
+            <p class="helper-text">If no image is selected, a default profile picture will be used.</p>
+        </div>
+        <br>
+        <div class="button-container">
+            <button type="submit" onclick="createAccount()">Create Account</button>
+        </div>
+    </div>
+</body>
+</html>
