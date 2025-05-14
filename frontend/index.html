@@ -23,11 +23,9 @@
     <script src="scripts/war-game.js" defer></script>
 </head>
 <body>
-    <!-- NO NAVBAR - Removed to avoid hiding components -->
-    
-    <!-- IMPORTANT: Original game UI - DO NOT modify structure -->
+    <!-- IMPORTANT: Original game UI - Preserved structure with enhanced styling -->
     <div class="profile-container">
-        <h2>Player Profiles</h2>
+        <h2 class="has-text-primary">Player Profiles</h2>
         <div class="profiles" id="profiles">
             <!-- Player profiles will be populated dynamically -->
         </div>
@@ -36,17 +34,25 @@
     <!-- Poker table will be inserted here dynamically via JavaScript -->
     
     <div class="container">
-        <h1>War Card Game</h1>
-        <div class="chatbox">
-            <div class="messages" id="messages"></div>
-            <div class="input-area">
-                <input type="text" id="messageInput" placeholder="Type your message here..." tabindex="1">
-                <button onclick="sendJson();" type="button">Send</button>
+        <h1 class="has-text-primary has-text-weight-bold">War Card Game</h1>
+        <div class="chatbox enhanced-chatbox">
+            <div class="messages" id="messages">
+                <!-- Messages will be populated dynamically -->
+            </div>
+            <div class="input-area enhanced-input-area">
+                <input type="text" id="messageInput" class="enhanced-input" placeholder="Type your message here..." tabindex="1">
+                <button onclick="sendJson();" type="button" class="enhanced-send-button">
+                    <span class="icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </span>
+                </button>
             </div>
         </div>
     </div>
     
-    <div class="chat-toggle" id="chatToggle"></div>
+    <div class="chat-toggle" id="chatToggle">
+        <!-- Chat notification dot is added by JavaScript -->
+    </div>
     
     <div class="card-stack" id="cardStack">
         <div class="card" id="card">
@@ -59,7 +65,7 @@
     </div>
     
     <!-- Return to Games Lobby button - Styled with Bulma but keep id and class -->
-    <button id="backToLobbyBtn" class="back-to-lobby-btn button is-primary">
+    <button id="backToLobbyBtn" class="back-to-lobby-btn button is-primary is-rounded">
         <span class="icon">
             <i class="fas fa-arrow-left"></i>
         </span>
@@ -67,7 +73,7 @@
     </button>
 
     <div id="gameActions" class="game-actions">
-        <button id="startGameBtn" class="game-control-btn start-game button is-primary">
+        <button id="startGameBtn" class="game-control-btn start-game button is-primary is-rounded">
             <span class="icon">
                 <i class="fas fa-play"></i>
             </span>
@@ -76,37 +82,221 @@
     </div>
 
     <style>
-        /* Style enhancements for game controls without changing functionality */
-        .game-control-btn.button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Enhanced styling for buttons and chat */
+        .enhanced-chatbox {
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+        
+        .messages {
+            background-color: rgba(255, 255, 255, 0.92) !important;
+            border-radius: 8px !important;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 1rem !important;
+        }
+        
+        .enhanced-input-area {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            padding: 0.75rem !important;
+            gap: 0.75rem;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .enhanced-input {
+            background-color: white !important;
+            border-radius: 20px !important;
+            border: 2px solid #4CAF50 !important;
+            padding: 0.625rem 1rem !important;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .enhanced-input:focus {
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+            outline: none !important;
+        }
+        
+        .enhanced-send-button {
+            background-color: #4CAF50 !important;
+            color: white !important;
+            border-radius: 50% !important;
+            width: 40px !important;
+            height: 40px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .enhanced-send-button:hover {
+            background-color: #45a049 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .chat-toggle {
+            background-color: #4CAF50 !important;
+            border-radius: 8px 0 0 8px !important;
+            box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .chat-toggle:hover {
+            background-color: #45a049 !important;
+        }
+        
+        .chat-notification-dot {
+            background-color: #ff3b30 !important;
+            box-shadow: 0 0 8px rgba(255, 59, 48, 0.7);
+        }
+        
+        /* Game control buttons */
+        .game-control-btn.button.is-primary {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .game-control-btn.button.is-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-control-btn.button.is-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        .back-to-lobby-btn.button.is-primary {
+            background-color: #4CAF50;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            position: fixed;
+            bottom: 1.25rem;
+            left: 1.25rem;
+            z-index: 100;
+        }
+        
+        .back-to-lobby-btn.button.is-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Message box styling */
+        .message-box {
+            border-radius: 12px !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08) !important;
+            margin: 0.5rem 0 !important;
+            transition: all 0.2s;
+        }
+        
+        .message-box:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12) !important;
+        }
+        
+        .my-message {
+            background-color: #e8f5e9 !important;
+            border-top-right-radius: 4px !important;
+        }
+        
+        .other-message {
+            background-color: #f5f5f5 !important;
+            border-top-left-radius: 4px !important;
+        }
+        
+        .user-picture {
+            border: 2px solid #4CAF50;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Game notification */
+        .game-notification {
+            background-color: rgba(0, 0, 0, 0.85) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+            padding: 1rem 1.5rem !important;
+            font-weight: 500 !important;
+        }
+        
+        .game-notification.error {
+            background-color: rgba(244, 67, 54, 0.9) !important;
+        }
+        
+        .game-notification.turn {
+            background-color: rgba(255, 193, 7, 0.9) !important;
+        }
+        
+        .game-notification.card-played {
+            background-color: rgba(33, 150, 243, 0.9) !important;
+        }
+        
+        /* Profile container styling */
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+        }
+        
+        .profile-container h2 {
+            text-align: center;
+            margin-bottom: 1rem;
             font-weight: bold;
         }
         
-        .back-to-lobby-btn.button {
-            font-weight: bold;
-            background-color: #4CAF50; /* Green color */
+        .profile-box {
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem;
+            transition: all 0.3s;
         }
         
-        .back-to-lobby-btn.button:hover {
-            background-color: #45a049; /* Darker green on hover */
+        .profile-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
-        /* Hide original back to lobby button and replace with Bulma styled one */
-        #backToLobbyBtn {
-            border-radius: 4px;
-            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-            font-weight: normal;
+        .profile-box.current-user {
+            border: 2px solid #4CAF50;
         }
         
-        /* Ensure chat button maintains styling */
-        .input-area button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-left: 0.5rem;
+        .profile-picture {
+            border: 2px solid #4CAF50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .enhanced-input-area {
+                padding: 0.5rem !important;
+            }
+            
+            .game-control-btn.button.is-primary, 
+            .back-to-lobby-btn.button.is-primary {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .enhanced-send-button {
+                width: 36px !important;
+                height: 36px !important;
+            }
         }
     </style>
 </body>
