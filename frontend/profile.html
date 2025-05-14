@@ -4,85 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="styles/profile.css">
+    <!-- Add Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Custom styles to enhance Bulma (now includes functionality from profile.css) -->
+    <link rel="stylesheet" href="styles/bulma-custom.css">
+    <!-- Required scripts -->
     <script src="scripts/config.js"></script>
     <!-- Authentication check script -->
     <script src="scripts/auth-check.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
-    <!-- View Mode Container -->
-    <div id="viewMode" class="profile-container">
-        <h1>User Profile</h1>
-        <div class="profile-content">
-            <div class="profile-header">
-                <div class="profile-picture-container">
-                    <img id="profilePicture" src="" alt="Profile Picture" class="profile-picture">
-                </div>
-                <div class="profile-info">
-                    <h2 id="username">Loading...</h2>
-                </div>
-            </div>
-            
-            <div class="profile-details">
-                <div class="detail-section">
-                    <h3>Bio</h3>
-                    <p id="userBio">Loading...</p>
-                </div>
-                
-                <div class="detail-section">
-                    <h3>Favorite Song</h3>
-                    <p id="userSong">Loading...</p>
-                </div>
-            </div>
-            
-            <div id="modifyButtonContainer" class="button-container">
-                <button id="modifyProfileBtn" class="primary-btn">Modify Profile</button>
-            </div>
+<body class="has-background-light">
+    <!-- Navbar -->
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <strong>Card Game</strong>
+            </a>
         </div>
-        
-        <button id="backToGameBtn" class="back-button">Go back</button>
-    </div>
-    
-    <!-- Edit Mode Container -->
-    <div id="editMode" class="profile-container hidden">
-        <h1>Edit Profile</h1>
-        <div class="profile-content">
-            <div class="profile-header">
-                <div class="profile-picture-container">
-                    <img id="editProfilePicture" src="" alt="Profile Picture" class="profile-picture">
-                    <div class="picture-upload">
-                        <label for="profilePictureUpload" class="upload-label">Change Picture</label>
-                        <input type="file" id="profilePictureUpload" accept="image/*" class="hidden">
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <!-- View Mode Container -->
+            <div id="viewMode" class="profile-container">
+                <div class="box has-shadow">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <h1 class="title has-text-primary">User Profile</h1>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <button id="backToGameBtn" class="button is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </span>
+                                    <span>Back</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="columns">
+                        <div class="column is-4">
+                            <div class="has-text-centered">
+                                <figure class="image is-128x128 is-inline-block mb-4">
+                                    <img id="profilePicture" src="" alt="Profile Picture" class="is-rounded">
+                                </figure>
+                                <h2 id="username" class="title is-4">Loading...</h2>
+                            </div>
+                        </div>
+                        <div class="column is-8">
+                            <div class="content">
+                                <div class="block">
+                                    <h3 class="title is-5 has-text-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        Bio
+                                    </h3>
+                                    <div class="box">
+                                        <p id="userBio">Loading...</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="block">
+                                    <h3 class="title is-5 has-text-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-music"></i>
+                                        </span>
+                                        Favorite Song
+                                    </h3>
+                                    <div class="box">
+                                        <p id="userSong">Loading...</p>
+                                    </div>
+                                </div>
+                                
+                                <div id="modifyButtonContainer" class="buttons is-centered mt-5">
+                                    <button id="modifyProfileBtn" class="button is-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span>Modify Profile</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="profile-info">
-                    <h2 id="editUsername">Loading...</h2>
-                    <p class="username-note">(Username cannot be changed)</p>
+            </div>
+            
+            <!-- Edit Mode Container -->
+            <div id="editMode" class="profile-container hidden">
+                <div class="box has-shadow">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <h1 class="title has-text-primary">Edit Profile</h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="columns">
+                        <div class="column is-4">
+                            <div class="has-text-centered">
+                                <figure class="image is-128x128 is-inline-block mb-4">
+                                    <img id="editProfilePicture" src="" alt="Profile Picture" class="is-rounded">
+                                </figure>
+                                
+                                <div class="file is-centered is-boxed">
+                                    <label class="file-label">
+                                        <input id="profilePictureUpload" class="file-input" type="file" accept="image/*">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Change Picture
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                
+                                <h2 id="editUsername" class="title is-4 mt-4">Loading...</h2>
+                                <p class="subtitle is-6 has-text-grey">(Username cannot be changed)</p>
+                            </div>
+                        </div>
+                        <div class="column is-8">
+                            <div class="content">
+                                <div class="field">
+                                    <label class="label">Bio</label>
+                                    <div class="control">
+                                        <textarea id="editBio" class="textarea" placeholder="Write something about yourself..."></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="field">
+                                    <label class="label">Favorite Song</label>
+                                    <div class="control has-icons-left">
+                                        <input id="editSong" class="input" type="text" placeholder="Your favorite song">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-music"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="buttons is-centered mt-5">
+                                    <button id="saveChangesBtn" class="button is-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-save"></i>
+                                        </span>
+                                        <span>Save Changes</span>
+                                    </button>
+                                    <button id="cancelBtn" class="button is-light">
+                                        <span class="icon">
+                                            <i class="fas fa-times"></i>
+                                        </span>
+                                        <span>Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="profile-details">
-                <div class="detail-section">
-                    <h3>Bio</h3>
-                    <textarea id="editBio" placeholder="Write something about yourself..."></textarea>
-                </div>
-                
-                <div class="detail-section">
-                    <h3>Favorite Song</h3>
-                    <input type="text" id="editSong" placeholder="Your favorite song">
-                </div>
-            </div>
-            
-            <div class="button-container">
-                <button id="saveChangesBtn" class="primary-btn">Save Changes</button>
-                <button id="cancelBtn" class="secondary-btn">Cancel</button>
-            </div>
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message"></div>
         </div>
-    </div>
+    </section>
     
-    <!-- Status Message -->
-    <div id="statusMessage" class="status-message"></div>
-    
+    <!-- Load the original profile.js script for functionality -->
     <script src="scripts/profile.js"></script>
 </body>
 </html>

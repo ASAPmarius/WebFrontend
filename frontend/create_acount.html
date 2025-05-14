@@ -3,36 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
-    <link rel="stylesheet" href="styles/style_create_acount.css">
+    <title>Create Account - Card Game</title>
+    <!-- Add Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Custom styles to enhance Bulma -->
+    <link rel="stylesheet" href="styles/bulma-custom.css">
+    <!-- Required scripts -->
     <script src="scripts/config.js"></script>
     <script src="scripts/script_create_acount.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Create an Account</h1>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-        <span id="error-message" style="color: red; display: none;"></span>
-        <br>
-        <label for="profile_picture">Profile Picture (optional):</label>
-        <div class="profile-upload">
-            <input type="file" id="profile_picture_upload" accept="image/*">
-            <div id="image-preview" style="display: none;">
-                <img id="preview" src="#" alt="Preview" class="profile-picture">
+    <!-- Hero banner with card game background -->
+    <section class="hero is-fullheight card-game-bg">
+        <div class="hero-body">
+            <div class="container">
+                <!-- Card symbols as decoration -->
+                <div class="is-flex is-justify-content-center mb-5">
+                    <span class="card-symbol card-symbol-spade"></span>
+                    <span class="card-symbol card-symbol-heart"></span>
+                    <span class="card-symbol card-symbol-diamond"></span>
+                    <span class="card-symbol card-symbol-club"></span>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-6-tablet is-5-desktop is-4-widescreen">
+                        <div class="box has-shadow" style="overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(135deg, #4CAF50, #2E7D32);"></div>
+                            <h1 class="title has-text-centered has-text-primary">Create an Account</h1>
+                            <h2 class="subtitle has-text-centered is-size-6">Join our card game community</h2>
+                            
+                            <div class="field">
+                                <label class="label">Username</label>
+                                <div class="control has-icons-left">
+                                    <input id="username" name="username" class="input" type="text" placeholder="Choose a username" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control has-icons-left">
+                                    <input id="password" name="password" class="input" type="password" placeholder="Choose a password" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label">Confirm Password</label>
+                                <div class="control has-icons-left">
+                                    <input id="confirm_password" name="confirm_password" class="input" type="password" placeholder="Confirm your password" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Error message area -->
+                            <div id="error-message" class="notification is-danger is-light" style="display: none;">
+                                <button class="delete"></button>
+                                <span class="error-text"></span>
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label">Profile Picture (optional)</label>
+                                <div class="file has-name is-fullwidth">
+                                    <label class="file-label">
+                                        <input class="file-input" type="file" name="profile_picture_upload" id="profile_picture_upload" accept="image/*">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file...
+                                            </span>
+                                        </span>
+                                        <span class="file-name">
+                                            No file chosen
+                                        </span>
+                                    </label>
+                                </div>
+                                <p class="help">If no image is selected, a default profile picture will be used.</p>
+                            </div>
+                            
+                            <div id="image-preview" class="field has-text-centered my-4" style="display: none;">
+                                <figure class="image is-128x128 is-inline-block">
+                                    <img id="preview" src="#" alt="Preview" class="is-rounded">
+                                </figure>
+                            </div>
+                            
+                            <div class="field mt-5">
+                                <div class="control">
+                                    <button class="button is-primary is-fullwidth" type="submit" onclick="createAccount()">
+                                        <span class="icon">
+                                            <i class="fas fa-user-plus"></i>
+                                        </span>
+                                        <span>Create Account</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <div class="control">
+                                    <a href="login.html" class="button is-light is-fullwidth">
+                                        <span class="icon">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </span>
+                                        <span>Back to Login</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="helper-text">If no image is selected, a default profile picture will be used.</p>
         </div>
-        <br>
-        <div class="button-container">
-            <button type="submit" onclick="createAccount()">Create Account</button>
-        </div>
-    </div>
+    </section>
+
+    <script>
+        // Handle file input display and image preview
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close error notification when delete button is clicked
+            const closeBtn = document.querySelector('.notification .delete');
+            const notification = document.getElementById('error-message');
+            
+            if (closeBtn && notification) {
+                closeBtn.addEventListener('click', function() {
+                    notification.style.display = 'none';
+                });
+            }
+            
+            // Update file name display when a file is selected
+            const fileInput = document.querySelector('.file-input');
+            const fileName = document.querySelector('.file-name');
+            
+            if (fileInput && fileName) {
+                fileInput.addEventListener('change', function(event) {
+                    if (fileInput.files.length > 0) {
+                        fileName.textContent = fileInput.files[0].name;
+                    } else {
+                        fileName.textContent = 'No file chosen';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

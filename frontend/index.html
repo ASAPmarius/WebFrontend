@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Game - War</title>
+    <!-- Add Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Custom styles to enhance Bulma -->
+    <link rel="stylesheet" href="styles/bulma-custom.css">
+    <!-- Game-specific styles - IMPORTANT: Keep these intact for game functionality -->
+    <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/war-styles.css">
+    
     <script src="scripts/config.js"></script>
     <!-- Authentication check script -->
     <script src="scripts/auth-check.js"></script>
-    <!-- Single consolidated CSS file -->
-    <link rel="stylesheet" href="styles/main-style.css">
-    <!-- Add War game specific styles -->
-    <link rel="stylesheet" href="styles/war-styles.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Load the base card game framework first -->
     <script src="scripts/card-game.js" defer></script>
     <!-- Then load the War game implementation -->
     <script src="scripts/war-game.js" defer></script>
 </head>
 <body>
+    <!-- NO NAVBAR - Removed to avoid hiding components -->
+    
+    <!-- IMPORTANT: Original game UI - DO NOT modify structure -->
     <div class="profile-container">
         <h2>Player Profiles</h2>
         <div class="profiles" id="profiles">
@@ -49,11 +58,56 @@
         <!-- Player's hand will be populated dynamically -->
     </div>
     
-    <!-- Return to Games Lobby button -->
-    <button id="backToLobbyBtn" class="back-to-lobby-btn">Back to Games Lobby</button>
+    <!-- Return to Games Lobby button - Styled with Bulma but keep id and class -->
+    <button id="backToLobbyBtn" class="back-to-lobby-btn button is-primary">
+        <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Back to Lobby</span>
+    </button>
 
     <div id="gameActions" class="game-actions">
-        <button id="startGameBtn" class="game-control-btn start-game">Start Game</button>
+        <button id="startGameBtn" class="game-control-btn start-game button is-primary">
+            <span class="icon">
+                <i class="fas fa-play"></i>
+            </span>
+            <span>Start Game</span>
+        </button>
     </div>
+
+    <style>
+        /* Style enhancements for game controls without changing functionality */
+        .game-control-btn.button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .back-to-lobby-btn.button {
+            font-weight: bold;
+            background-color: #4CAF50; /* Green color */
+        }
+        
+        .back-to-lobby-btn.button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        
+        /* Hide original back to lobby button and replace with Bulma styled one */
+        #backToLobbyBtn {
+            border-radius: 4px;
+            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            font-weight: normal;
+        }
+        
+        /* Ensure chat button maintains styling */
+        .input-area button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
 </body>
 </html>

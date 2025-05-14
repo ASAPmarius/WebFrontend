@@ -6,32 +6,335 @@
     <title>Card Game Lobby</title>
     <!-- Authentication check script -->
     <script src="scripts/auth-check.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
+    <!-- Add Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Custom styles to enhance Bulma -->
+    <link rel="stylesheet" href="styles/bulma-custom.css">
+    <!-- Game-specific styles - keeping original for game functionality -->
     <link rel="stylesheet" href="styles/games.css">
+    <!-- Required scripts -->
     <script src="scripts/config.js"></script>
     <script src="scripts/games.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
-    <button id="profileBtn" class="profile-btn">My Profile</button>
-    <button id="logoutBtn" class="logout-btn" onclick="logout()">Logout</button>
-    
-    <div class="lobby-container">
-        <div class="lobby-header">
-            <h1 class="lobby-title">Card Game Lobby</h1>
-            <button id="createGameBtn" class="create-game-btn">Create New Game</button>
+<body class="game-lobby-bg">
+    <!-- Navbar -->
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="games.html">
+                <strong>Card Game</strong>
+            </a>
         </div>
 
-        <div id="userStatus" class="user-status">
-            Checking your status...
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <a id="profileBtn" class="navbar-item">
+                    <span class="icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span>My Profile</span>
+                </a>
+                <a id="logoutBtn" class="navbar-item" onclick="logout()">
+                    <span class="icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </span>
+                    <span>Logout</span>
+                </a>
+            </div>
         </div>
+    </nav>
 
-        <div id="gamesLoading" class="loading">Loading available games...</div>
-        <div id="gamesList" class="games-list" style="display: none;"></div>
-        <div id="noGames" class="no-games" style="display: none;">
-            <p>No active games available. Create a new game to start playing!</p>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3">
+                    <!-- Sidebar with user status and controls -->
+                    <div class="box has-shadow content-block">
+                        <h3 class="title is-5">Game Status</h3>
+                        <div id="userStatus" class="notification is-info is-light">
+                            Checking your status...
+                        </div>
+                        <button id="createGameBtn" class="button is-primary is-fullwidth">
+                            <span class="icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span>Create New Game</span>
+                        </button>
+                        <button id="returnBtn" class="button is-link is-fullwidth mt-3" style="display: none;">
+                            <span class="icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                            <span>Return to Current Game</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="column is-9">
+                    <div class="box has-shadow">
+                        <h1 class="title is-4">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fas fa-dice"></i>
+                                </span>
+                                <span>Available Games</span>
+                            </span>
+                        </h1>
+                        
+                        <div id="gamesLoading" class="is-flex is-justify-content-center my-5">
+                            <div class="loader"></div>
+                            <p class="ml-3">Loading available games...</p>
+                        </div>
+                        
+                        <div id="gamesList" class="games-list" style="display: none;">
+                            <!-- Games will be loaded here dynamically -->
+                        </div>
+                        
+                        <div id="noGames" class="notification is-warning is-light" style="display: none;">
+                            <p>No active games available. Create a new game to start playing!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <!-- War Game Rules Section -->
+        <div class="columns mt-6">
+            <div class="column is-10 is-offset-1">
+                <div class="rules-card">
+                    <h2 class="title is-4">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fas fa-book"></i>
+                            </span>
+                            <span>How to Play War</span>
+                        </span>
+                    </h2>
+                    
+                    <div class="content">
+                        <p class="mb-4">War is one of the simplest card games around, but also one of the most exciting! The game is all about the luck of the draw, with the highest card winning each round.</p>
+                        
+                        <div class="columns">
+                            <div class="column is-7">
+                                <div class="rules-step">
+                                    <strong>Setup:</strong> The deck is divided evenly between two players, with each player receiving 26 cards, dealt face down.
+                                </div>
+                                
+                                <div class="rules-step">
+                                    <strong>Playing a Round:</strong> Each player reveals the top card of their deck. The player with the higher card value takes both cards and adds them to the bottom of their deck.
+                                </div>
+                                
+                                <div class="rules-step">
+                                    <strong>War:</strong> If both players reveal cards of equal value, it's War! Each player places three cards face down and then a fourth card face up. The player with the higher fourth card wins all the cards in play. If the fourth cards are also equal, the war continues!
+                                </div>
+                                
+                                <div class="rules-step">
+                                    <strong>Card Rankings:</strong> Cards are ranked from highest to lowest: Ace, King, Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, 2.
+                                </div>
+                                
+                                <div class="rules-step">
+                                    <strong>Winning the Game:</strong> The game ends when one player has all 52 cards, making them the winner!
+                                </div>
+                            </div>
+                            
+                            <div class="column is-5">
+                                <div class="box has-text-centered">
+                                    <h4 class="title is-5 has-text-primary">Quick Tips</h4>
+                                    <ul style="text-align: left;">
+                                        <li>Pay attention to the War rounds - they can quickly change the game!</li>
+                                        <li>Remember that Aces are high in this game</li>
+                                        <li>The game can take a while, so be patient</li>
+                                        <li>Enjoy the suspense of each card flip!</li>
+                                    </ul>
+                                    
+                                    <div class="card-symbols mt-4">
+                                        <span class="card-symbol card-symbol-spade"></span>
+                                        <span class="card-symbol card-symbol-heart"></span>
+                                        <span class="card-symbol card-symbol-diamond"></span>
+                                        <span class="card-symbol card-symbol-club"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <button id="returnBtn" class="return-btn">Return to Current Game</button>
-    </div>
+            <style>
+        /* Loader animation */
+        .loader {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #eee;
+            border-radius: 50%;
+            border-top: 3px solid #4CAF50;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Hide loading after 1 second */
+        #gamesLoading {
+            animation: fadeOut 1s forwards;
+            animation-delay: 1s;
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+                display: none;
+            }
+        }
+        
+        /* Override the games-list grid to use Bulma cards */
+        .games-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Ensure game cards use Bulma styling */
+        .game-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .game-card .card-footer-item.join-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .game-card .card-footer-item.join-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .game-card .card-footer-item.join-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Force show games list after loading fades */
+        #gamesList {
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 1s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+                display: grid !important;
+            }
+        }
+    </style>
+
+    <script>
+        // Enhanced script to create Bulma-styled game cards
+        document.addEventListener('DOMContentLoaded', function() {
+            // Override the displayGames function from games.js
+            const originalDisplayGames = globalThis.displayGames;
+            
+            if (typeof originalDisplayGames === 'function') {
+                globalThis.displayGames = function(games) {
+                    const gamesLoading = document.getElementById('gamesLoading');
+                    const gamesList = document.getElementById('gamesList');
+                    const noGames = document.getElementById('noGames');
+                    
+                    gamesLoading.style.display = 'none';
+                    
+                    if (!games || games.length === 0) {
+                        noGames.style.display = 'block';
+                        return;
+                    }
+                    
+                    gamesList.style.display = 'grid';
+                    gamesList.innerHTML = '';
+                    
+                    games.forEach(game => {
+                        const gameDate = new Date(game.DateCreated);
+                        const formattedDate = gameDate.toLocaleString();
+                        
+                        // Check if current user is in this game
+                        const userInGame = game.players && game.players.some(player => 
+                            sessionStorage.getItem('currentUsername') === player.username
+                        );
+                        
+                        // Create player list
+                        let playersList = '';
+                        if (game.players && game.players.length > 0) {
+                            playersList = game.players.map(player => `
+                                <div class="level is-mobile">
+                                    <div class="level-left">
+                                        <span class="icon">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span>${player.username}</span>
+                                    </div>
+                                </div>
+                            `).join('');
+                        } else {
+                            playersList = '<p class="has-text-grey">No players yet</p>';
+                        }
+                        
+                        // Create Bulma card
+                        const gameCard = document.createElement('div');
+                        gameCard.className = 'card game-card';
+                        
+                        gameCard.innerHTML = `
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Game #${game.idGame}
+                                </p>
+                                <p class="card-header-icon">
+                                    <span class="tag is-primary">${game.GameType}</span>
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <p class="is-size-7 has-text-grey">
+                                        <span class="icon">
+                                            <i class="far fa-clock"></i>
+                                        </span>
+                                        ${formattedDate}
+                                    </p>
+                                    <div class="block">
+                                        <p class="is-size-6 has-text-weight-bold">
+                                            Players (${game.players ? game.players.length : 0})
+                                        </p>
+                                        ${playersList}
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <button class="card-footer-item join-btn button" data-game-id="${game.idGame}" ${userInGame ? 'disabled' : ''}>
+                                    ${userInGame ? 'Already Joined' : 'Join Game'}
+                                </button>
+                            </footer>
+                        `;
+                        
+                        gamesList.appendChild(gameCard);
+                    });
+                    
+                    // Add event listeners to join buttons
+                    document.querySelectorAll('.join-btn').forEach(button => {
+                        if (!button.disabled) {
+                            button.addEventListener('click', function() {
+                                const gameId = this.getAttribute('data-game-id');
+                                joinGame(gameId);
+                            });
+                        }
+                    });
+                };
+            }
+        });
+    </script>
 </body>
 </html>

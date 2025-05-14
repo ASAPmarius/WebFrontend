@@ -1,0 +1,223 @@
+/* bulma-custom.css - Custom styling to enhance Bulma for the card game */
+
+/* General Theme Colors - Using Bulma variables for consistency */
+:root {
+  --primary-color: #4CAF50;
+  --primary-dark: #45a049;
+  --accent-color: #ff9800;
+  --background-color: #f5f5f5;
+  --card-background: white;
+  --text-dark: #333;
+  --text-light: #fff;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --fancy-gradient: linear-gradient(135deg, #4CAF50, #2E7D32);
+}
+
+/* Custom Bulma Overrides */
+.hero.is-primary {
+  background: var(--fancy-gradient);
+}
+
+.navbar.is-primary {
+  background-color: #4CAF50;
+}
+
+.button.is-primary {
+  background-color: var(--primary-color);
+}
+
+.button.is-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Make sure ALL primary elements use our green */
+.is-primary {
+  background-color: #4CAF50 !important;
+}
+
+a.navbar-item:hover,
+.navbar-link:hover {
+  background-color: #45a049 !important;
+  color: white !important;
+}
+
+/* Card shadows and styling */
+.has-shadow {
+  box-shadow: var(--shadow);
+}
+
+.title.has-text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Enhance Login and Account Page Elements */
+.box {
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: var(--card-background);
+}
+
+/* Make notifications more prominent */
+.notification {
+  border-radius: 6px;
+}
+
+.notification .delete {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+}
+
+/* Enhanced form inputs */
+.input:focus, .textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.125em rgba(76, 175, 80, 0.25);
+}
+
+/* Custom styles for game lobby */
+.game-card {
+  box-shadow: var(--shadow);
+}
+
+/* Clean profile styling */
+.profile-container .box {
+  border-left: 5px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-container .box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--fancy-gradient);
+}
+
+.profile-container .image.is-128x128 img {
+  border: 3px solid var(--primary-color);
+}
+
+/* ====================== ESSENTIAL FUNCTIONALITY FROM PROFILE.CSS ====================== */
+/* Hide elements with hidden class */
+.hidden {
+  display: none !important;
+}
+
+/* Status message styling */
+.status-message {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5625rem;
+  border-radius: 0.3125rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-weight: bold;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  min-width: 300px;
+  text-align: center;
+}
+
+.status-message.show {
+  opacity: 1;
+}
+
+.status-message.success {
+  background-color: rgba(76, 175, 80, 0.9);
+}
+
+.status-message.error {
+  background-color: rgba(244, 67, 54, 0.9);
+}
+
+/* ====================== END ESSENTIAL FUNCTIONALITY ====================== */
+
+/* Card game themed backgrounds */
+.card-game-bg {
+  background-color: #1a5c20; /* Dark green poker table color */
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 17.83V0h17.83a3 3 0 0 1-5.66 2H5.9A5 5 0 0 1 2 5.9v6.27a3 3 0 0 1-2 5.66zm0 18.34a3 3 0 0 1 2 5.66v6.27A5 5 0 0 1 5.9 52h6.27a3 3 0 0 1 5.66 0H0V36.17zM36.17 52a3 3 0 0 1 5.66 0h6.27a5 5 0 0 1 3.9-3.9v-6.27a3 3 0 0 1 0-5.66V52H36.17zM52 36.17a3 3 0 0 1 0-5.66V5.9A5 5 0 0 1 48.1 2h-6.27a3 3 0 0 1-5.66-2H52v36.17z' fill='rgba(255,255,255,0.03)' fill-rule='evenodd'/%3E%3C/svg%3E"),
+    radial-gradient(circle at center, #2a7d2e 0%, #1a5c20 100%);
+}
+
+/* Game lobby background */
+.game-lobby-bg {
+  background-color: #f5f5f5;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(76, 175, 80, 0.05)' fill-rule='evenodd'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, #ffffff, #f5f5f5);
+}
+
+/* Rules card styling */
+.rules-card {
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  background-color: white;
+  border-left: 5px solid var(--primary-color);
+}
+
+.rules-card .title {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.rules-step {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.rules-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.rules-step:nth-child(1)::before { content: "1"; }
+.rules-step:nth-child(2)::before { content: "2"; }
+.rules-step:nth-child(3)::before { content: "3"; }
+.rules-step:nth-child(4)::before { content: "4"; }
+.rules-step:nth-child(5)::before { content: "5"; }
+
+/* Card symbols for background decoration */
+.card-symbol {
+  font-size: 1.5rem;
+  margin: 0 0.25rem;
+  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card-symbol-spade::before { content: "♠"; }
+.card-symbol-heart::before { content: "♥"; color: rgba(255, 50, 50, 0.7); }
+.card-symbol-diamond::before { content: "♦"; color: rgba(255, 50, 50, 0.7); }
+.card-symbol-club::before { content: "♣"; }
+
+/* Responsive improvements */
+@media screen and (max-width: 768px) {
+  .box {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+}
