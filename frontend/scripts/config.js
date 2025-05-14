@@ -23,7 +23,7 @@ const config = (function() {
   // Allow overriding the backend URL via a global variable that can be set by the server
   // This lets Dokku environment vars get passed to the frontend
   const backendUrl = isProduction 
-    ? (globalThis.BACKEND_URL || `https://caracaca-backend.your-dokku-domain.com`)
+    ? (globalThis.BACKEND_URL || `http://caracaca-backend.cluster-ig3.igpolytech.fr`)
     : `http://localhost:3000`;
   
   // WebSocket URL is derived from the backend URL
