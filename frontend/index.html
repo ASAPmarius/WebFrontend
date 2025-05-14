@@ -22,7 +22,7 @@
     <!-- Then load the War game implementation -->
     <script src="scripts/war-game.js" defer></script>
 </head>
-<body>
+<body class="war-game-bg">
     <!-- IMPORTANT: Original game UI - Preserved structure with enhanced styling -->
     <div class="profile-container">
         <h2 class="has-text-weight-bold" style="color: #4CAF50;">Player Profiles</h2>
@@ -231,7 +231,7 @@
             border-radius: 12px !important;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
             padding: 1rem 1.5rem !important;
-            font-weight: 500 !important;
+            font-weight: 600 !important;
         }
         
         .game-notification.error {
@@ -283,6 +283,56 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
+        /* Background styling */
+        .war-game-bg {
+            position: relative;
+            background-color: #1a3a20;
+            overflow: hidden;
+        }
+        
+        .war-game-bg::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234CAF50' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .war-game-bg::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(46, 125, 50, 0.4) 0%, rgba(26, 58, 32, 0.1) 70%),
+                        radial-gradient(circle at 80% 70%, rgba(46, 125, 50, 0.4) 0%, rgba(26, 58, 32, 0.1) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Card symbols animation */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .floating-symbol {
+            position: fixed;
+            z-index: -1;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 2rem;
+            pointer-events: none;
+            animation: float 20s linear infinite;
+        }
+        
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             .enhanced-input-area {
@@ -301,5 +351,42 @@
             }
         }
     </style>
+    
+    <!-- Floating card symbols for background animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating card symbols
+            const symbolsCount = 20;
+            const symbols = ['♠', '♥', '♦', '♣'];
+            const container = document.body;
+            
+            for (let i = 0; i < symbolsCount; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'floating-symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Random positioning
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = 1 + Math.random() * 2;
+                symbol.style.fontSize = `${size}rem`;
+                
+                // Random color tint
+                if (symbol.textContent === '♥' || symbol.textContent === '♦') {
+                    symbol.style.color = 'rgba(255, 70, 70, 0.08)';
+                }
+                
+                // Random animation duration and delay
+                const duration = 15 + Math.random() * 20;
+                const delay = Math.random() * 40;
+                symbol.style.animationDuration = `${duration}s`;
+                symbol.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(symbol);
+            }
+        });
+    </script>
 </body>
 </html>
